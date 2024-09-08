@@ -24,10 +24,15 @@ const createChatLi = (message, className) => {
 // Main function to generate the message from api call :-
 const generateResponse = (incomingChatli) => {
   const messageElement = incomingChatli.querySelector("p");
-  fetch('https://jsonplaceholder.typicode.com/todos/1')
+  // fetch('https://jsonplaceholder.typicode.com/todos/1')
+  let queryStr = `https://doj-stage.azurewebsites.net/api/generate/?query=${currUserMsg}`;
+  fetch(queryStr, {
+    mode: "no-cors"
+  })
       .then(response => response.json())
       .then(data => {
-        messageElement.textContent = `User msg: ${currUserMsg} API call: ${data.title}`;
+        // messageElement.textContent = `${data.response}`;
+        console.log(data);
       })
 };
 // -------------------------------------------------------------------------------------------
