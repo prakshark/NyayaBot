@@ -26,13 +26,11 @@ const generateResponse = (incomingChatli) => {
   const messageElement = incomingChatli.querySelector("p");
   // fetch('https://jsonplaceholder.typicode.com/todos/1')
   let queryStr = `https://doj-stage.azurewebsites.net/api/generate/?query=${currUserMsg}`;
-  fetch(queryStr, {
-    mode: "no-cors"
-  })
+  fetch(queryStr)
       .then(response => response.json())
       .then(data => {
-        // messageElement.textContent = `${data.response}`;
-        console.log(data);
+        messageElement.textContent = `${data.response}`;
+        console.log(data.response);
       })
 };
 // -------------------------------------------------------------------------------------------
