@@ -5,6 +5,7 @@ const sendChatbtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
 const inputInitHeight = chatInput.scrollHeight;
 let currUserMsg = "NULL";
+let pastMessages = "";
 
 const createChatLi = (message, className) => {
   //Create a chat <li> element with passed message and class name
@@ -25,11 +26,12 @@ const createChatLi = (message, className) => {
 const generateResponse = (incomingChatli) => {
   const messageElement = incomingChatli.querySelector("p");
   // fetch('https://jsonplaceholder.typicode.com/todos/1')
-  let queryStr = `https://doj-stage.azurewebsites.net/api/generate/?query=${currUserMsg}`;
+  let queryStr = `https://doj-stage.azurewebsites.net/api/generate/?query=${currUserMsg} & past_messages = ${pastMessages}`;
   fetch(queryStr)
       .then(response => response.json())
       .then(data => {
         messageElement.textContent = `${data.response}`;
+        pastMessages = pastMessages + data.response;
         console.log(data.response);
       })
 };
